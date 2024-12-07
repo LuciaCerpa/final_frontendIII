@@ -1,16 +1,26 @@
 import {Link} from "react-router";
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import { useContextGlobal } from "./utils/global.context";
 
 const Navbar = () => {
 
+  const {dispatch, state: {theme}} = useContextGlobal();
+
+  const chageTheme = ()=>{
+    dispatch({ type:  "TOGGLE_THEME", payload: theme ? "" : "dark"})
+  }
   return (
     <nav>
-      {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
-      {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      <Link to="/">Home</Link>
-      <Link to="/favs">Favs</Link>
-      <Link to="/contacto">Contacto</Link>
-      <button>Change theme</button>
+      <img src="../../public/images/DH.png" alt="digital house" height={25} />
+      <div className="linksGroup">
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/favs">Favs</Link>
+          <Link to="/contacto">Contacto</Link>
+        </div>
+        <button className="themeBtn" onClick={chageTheme}>
+          <img src={`../../public/images/${theme ? "day" : "night"}.png`} height={25}/>
+        </button>
+      </div>
     </nav>
   )
 }

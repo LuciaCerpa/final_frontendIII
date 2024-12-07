@@ -1,31 +1,32 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-
 const Detail = () => {
   const [ dentist, setDentist ] = useState({});
-  // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
   const params = useParams();
-
-  const url = "https://"+params.id;
+  const url = "https://jsonplaceholder.typicode.com/users/"+params.id;
 
   useEffect(() => {
-      axios(url).then(res => {
-        console.log(res.data);
-        setDentist(res.data);
-      })
-  })
+      axios(url).then(res => setDentist(res.data))
+  },[])
 
   return (
-    <>
+    <main>
       <h1>Detail Dentist id </h1>
-      <img src="" alt="" />
-      <p>name</p>
-      {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
-      {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
-    </>
+      <div className='detail'>
+        <img src="../public/images/doctor.jpg" alt={dentist.username} height={250} />
+        <div className='detail_info'>
+          <p>Name: <span>{dentist.name}</span></p>
+          <p>Email: <span>{dentist.email}</span></p>
+          <p>Phone: <span>{dentist.phone}</span></p>
+          <p>Website: <span>{dentist.website}</span></p>
+          <p>Company: <span>{dentist.company?.name}</span></p>
+          <p>Address: <span>{`${dentist.address?.street}, ${dentist.address?.city}`}</span> </p>
+          <p>Zipcode: <span>{dentist.address?.zipcode}</span></p>
+        </div>
+      </div>
+    </main>
   )
 }
 

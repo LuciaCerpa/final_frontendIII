@@ -1,33 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useContextGlobal } from "./utils/global.context";
+import Tooltip from "./ToolTip"
 
-
-const Card = ({ fav }) => {
-
-  const [dentistas, setDentistas] = useState([]);
-  const [dentista, setDentista] = useState({});
-  //const { setFavs } = useContextGlobal();
+const Card = ({ dentist }) => {
   const { dispatch, state: {favs} } = useContextGlobal();
-  const findFav = favs.find(fav => fav.id === Card.id)
+  const findFav = favs.find(fav => fav.id === dentist.id)
   const addFav = ()=>{
-    //setFavs(prevState  => [...prevState, fa]);
-    dispatch({ type:  findFav ? "DELETE_FAV" :  "ADD_FAV", payload: fav})
-    //localStorage.setItem(`Fav${id}`, fav);
-
+    dispatch({ type:  findFav ? "DELETE_FAV" :  "ADD_FAV", payload: dentist})
   }
 
   return (
-    <div className="card">
-      <Link to={`/detail/${id}`}>
-        {/* En cada card deberan mostrar en name - username y el id */}
-
-        {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-      </Link>
-      <button onClick={addFav} className="favButton">{findFav ? "estrella " : "estrella rallito "}</button>
-
+    <div className="card"> 
+      <Tooltip text="Doctor Details">
+        <Link to={`/detail/${dentist.id}`}>
+          <img src="../public/images/doctor.jpg" alt={dentist.username} height={200} width={200}/>
+          <h5>{dentist.username + dentist.id}</h5>
+        </Link>
+      </Tooltip>  
+      <Tooltip text={findFav ? "Remove from favorites" : "Add to favorites"}>
+        <button onClick={addFav} className="favButton"><img src={`../../public/images/${findFav ? "star" : "darkStar"}.png`} height={25}/></button>
+      </Tooltip>
     </div>
   );
 };
