@@ -10,7 +10,7 @@ const Navbar = () => {
   }
   return (
     <nav>
-      <img src="../../public/images/DH.png" alt="digital house" height={25} />
+      <img src="/images/DH.png" alt="digital house" height={25} />
       <div className="linksGroup">
         <div>
           <Link to="/">Home</Link>
