@@ -18,7 +18,7 @@ const Navbar = () => {
           <Link to="/contacto">Contacto</Link>
         </div>
         <button className="themeBtn" onClick={chageTheme}>
-          <img src={`../../public/images/${theme ? "day" : "night"}.png`} height={25}/>
+          <img src={`/images/${theme ? "day" : "night"}.png`} height={25}/>
         </button>
       </div>
     </nav>

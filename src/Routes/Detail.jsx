@@ -15,7 +15,7 @@ const Detail = () => {
     <main>
       <h1>Detail Dentist id </h1>
       <div className='detail'>
-        <img src="../public/images/doctor.jpg" alt={dentist.username} height={250} />
+        <img src="/images/doctor.jpg" alt={dentist.username} height={250} />
         <div className='detail_info'>
           <p>Name: <span>{dentist.name}</span></p>
           <p>Email: <span>{dentist.email}</span></p>
